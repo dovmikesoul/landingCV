@@ -173,8 +173,10 @@
             border-color: #374151;
         }
 
-        body.dark-mode .tech-icon {
-            filter: brightness(0.85) invert(0.85);
+        /* Elimina el filtro de las imágenes en modo dark */
+        body.dark-mode .tech-icon,
+        body.dark-mode img {
+            filter: none !important;
         }
 
         #dark-mode-toggle:hover {
