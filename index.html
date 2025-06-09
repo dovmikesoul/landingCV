@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Currículum - Desarrollador de Software</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9fafb;
+            color: #111827;
+        }
+
+        header,
+        footer {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #1f2937;
+            color: white;
+            z-index: 1000;
+            transition: background 0.3s, backdrop-filter 0.3s, height 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            height: 220px;
+            /* ocupa más área cuando está arriba */
+            justify-content: center;
+        }
+
+        header.scrolled {
+            background: rgba(31, 41, 55, 0.5);
+            backdrop-filter: blur(8px);
+            height: 80px;
+            /* reduce el tamaño al hacer scroll */
+            flex-direction: row !important;
+            justify-content: flex-start !important;
+            align-items: center !important;
+            gap: 0 !important;
+        }
+
+        .profile-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            margin-bottom: 0.5rem;
+            background: #e5e7eb;
+            transition: margin 0.3s;
+        }
+
+        header.scrolled .profile-img {
+            margin-bottom: 0;
+            margin-right: 1rem;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 14rem auto 2rem auto;
+            /* más espacio arriba para header grande */
+            padding: 1rem;
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: margin-top 0.3s;
+        }
+
+        header.scrolled~.container {
+            margin-top: 7rem !important;
+            /* menos espacio cuando header es pequeño */
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #1f2937;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.25rem;
+        }
+
+        p,
+        li {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .contact p {
+            margin: 0.25rem 0;
+        }
+
+        footer {
+            background-color: #1f2937;
+            color: white;
+        }
+
+        .tech-icon {
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+
+        .tech-icon:hover {
+            transform: scale(1.35);
+            z-index: 2;
+        }
+
+        body.dark-mode header.scrolled {
+            background: rgba(31, 41, 55, 0.5) !important;
+            backdrop-filter: blur(8px) !important;
+        }
+
+        body.dark-mode {
+            background-color: #181a1b;
+            color: #f3f4f6;
+        }
+
+        body.dark-mode .container {
+            background-color: #23272b;
+            color: #f3f4f6;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+        }
+
+        body.dark-mode header,
+        body.dark-mode footer {
+            background-color: #111827 !important;
+            color: #f3f4f6 !important;
+        }
+
+        body.dark-mode h1,
+        body.dark-mode h2,
+        body.dark-mode h3 {
+            color: #f3f4f6 !important;
+        }
+
+        body.dark-mode a {
+            color: #38bdf8 !important;
+        }
+
+        body.dark-mode .section {
+            border-color: #374151;
+        }
+
+        body.dark-mode .tech-icon {
+            filter: brightness(0.85) invert(0.85);
+        }
+
+        #dark-mode-toggle:hover {
+            background: rgba(60, 60, 60, 0.12);
+        }
+    </style>
+    <script>
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('main-header');
+            if (window.scrollY > 30) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+
+        // Detecta si es móvil o escritorio y redirige al enlace correcto de WhatsApp
+        document.addEventListener('DOMContentLoaded', function () {
+            const phone = '529612445094';
+            const message = encodeURIComponent('¡Hola! Me gustaría ponerme en contacto contigo.');
+            const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
+            const waUrl = isMobile
+                ? `https://wa.me/${phone}?text=${message}`
+                : `https://web.whatsapp.com/send?phone=${phone}&text=${message}`;
+            document.getElementById('whatsapp-link').setAttribute('href', waUrl);
+            document.getElementById('whatsapp-link').setAttribute('target', '_blank');
+            document.getElementById('whatsapp-link').setAttribute('rel', 'noopener noreferrer');
+        });
+
+
+        function setDarkMode(enabled) {
+            document.body.classList.toggle('dark-mode', enabled);
+            document.getElementById('dark-mode-icon').textContent = enabled ? '☀️' : '🌙';
+            document.getElementById('dark-mode-toggle').checked = enabled;
+
+            // Mueve el "knob" del switch
+            document.getElementById('switch-knob').style.transform = enabled ? 'translateX(20px)' : 'translateX(0)';
+            document.querySelector('.switch').style.background = enabled ? '#4caf50' : '#ccc';
+
+            localStorage.setItem('darkMode', enabled ? '1' : '0');
+        }
+
+        function getSystemPrefersDark() {
+            return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            let darkMode = localStorage.getItem('darkMode');
+            if (darkMode === null) {
+                darkMode = getSystemPrefersDark() ? '1' : '0';
+            }
+            setDarkMode(darkMode === '1');
+
+            document.getElementById('dark-mode-toggle').addEventListener('change', function (e) {
+                setDarkMode(e.target.checked);
+            });
+
+            if (window.matchMedia) {
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                    if (localStorage.getItem('darkMode') === null) {
+                        setDarkMode(e.matches);
+                    }
+                });
+            }
+        });
+
+    </script>
+</head>
+
+<body>
+    <header id="main-header">
+        <img src="https://scontent.ftlc3-1.fna.fbcdn.net/v/t39.30808-6/503750139_553922037779255_2157257659630892591_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeEAhrefzi1hye1BqBsprHKOV4SQVrKfO-9XhJBWsp8774jYOqSNoiRTZQ68h_FoMBWJqN2lBrwEgn3WaHaB7VkF&_nc_ohc=tYKpDIj5Z_EQ7kNvwG183vj&_nc_oc=Admb9yCOvx5yQLtOHxibK9yF1rtarNRNUj4AaTP27br4X5b-w3DtU7BGSfVcWYeKUGI&_nc_zt=23&_nc_ht=scontent.ftlc3-1.fna&_nc_gid=ryqOVhK2WNqQMG7_KKsrkQ&oh=00_AfNfE5J9cfm7jJPh7N3I9Bs5kiMAT_ErRCoY6GOr5WECsQ&oe=684D0C9B"
+            alt="Foto de perfil" class="profile-img" />
+        <div style="text-align: left;">
+            <h1 style="color: #fff;">Desarrollador de Software</h1>
+            Tuxtla Gutiérrez, Chiapas |
+            <a href="mailto:dovmikesoul@gmail.com"
+                style="color: #fff; text-decoration: underline;">dovmikesoul@gmail.com</a> |
+            <a id="whatsapp-link" href="#" style="color: #25d366; text-decoration: underline; font-weight: 600;">
+                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp"
+                    width="20"
+                    style="vertical-align: middle; margin-right: 4px; filter: invert(54%) sepia(97%) saturate(749%) hue-rotate(85deg) brightness(95%) contrast(92%);" />
+                Enviar WhatsApp
+            </a>
+        </div>
+        <label
+            style="position: absolute; right: 2rem; top: 2rem; display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+            <input type="checkbox" id="dark-mode-toggle" style="display: none;">
+            <span id="dark-mode-icon" style="font-size: 1.2rem;">🌙</span>
+            <span class="switch" style="width: 40px; height: 20px; background: #ccc; border-radius: 999px; position: relative; display: inline-block; transition: background 0.3s;">
+                <span style="content: ''; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; background: white; border-radius: 50%; transition: transform 0.3s; " id="switch-knob"></span>
+            </span>
+        </label>
+
+    </header>
+
+    <main class="container">
+        <section class="section">
+            <h2>Resumen Profesional</h2>
+            <p>Desarrollador de software con experiencia en el diseño y desarrollo de aplicaciones web y móviles. Manejo
+                de diversos lenguajes de programación y frameworks modernos, con enfoque en la implementación de
+                soluciones eficientes y escalables. Capacidad para trabajar en equipos multidisciplinarios bajo
+                metodologías ágiles, con habilidades tanto en frontend como backend. Apasionado por la tecnología y el
+                aprendizaje continuo.</p>
+        </section>
+
+        <section class="section">
+            <h2>Experiencia Laboral</h2>
+            <h3><a href="https://mwconsultores.com.mx/" target="_blank" rel="noopener noreferrer">MW Consultores –
+                    Tuxtla Gutiérrez, Chiapas</a></h3>
+            <p><strong>Cargo:</strong> Desarrollador de Software</p>
+            <p><strong>Periodo:</strong> Agosto 2024 – Mayo 2025</p>
+            <p><strong>Dirección:</strong> C. Playas de Catazajá 1094, Col. Los Laguitos</p>
+            <ul>
+                <li>Desarrollo y mantenimiento de aplicaciones web y móviles personalizadas utilizando Laravel, Angular
+                    y Flutter.</li>
+                <li>Construcción de APIs y lógica de negocio en PHP y Node.js, integrando bases de datos SQL.</li>
+                <li>Implementación de interfaces responsivas y funcionales con HTML, CSS y TypeScript.</li>
+                <li>Uso de Git para control de versiones y colaboración en entornos ágiles con metodologías como Scrum.
+                </li>
+                <li>Documentación técnica de sistemas y soporte post implementación.</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Educación</h2>
+            <h3><a href="https://www.unach.mx/" target="_blank" rel="noopener noreferrer">Universidad Autónoma de
+                    Chiapas (UNACH)</a></h3>
+            <p><strong>Carrera:</strong> Lic. Ing. en Desarrollo y Tecnologías de Software</p>
+            <p><strong>Periodo:</strong> 2020 – 2025</p>
+            <p><strong>Ubicación:</strong> Boulevard Belisario Domínguez, Kilómetro 1081, Terán, Tuxtla Gutiérrez,
+                Chiapas, C.P. 29050</p>
+        </section>
+
+        <section class="section">
+            <h2>Habilidades Técnicas</h2>
+            <h3>Lenguajes de Programación:</h3>
+            <p>
+                <img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C"
+                    title="C" width="32" height="32" />
+                <img class="tech-icon"
+                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++"
+                    title="C++" width="32" height="32" />
+                <img class="tech-icon"
+                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C#"
+                    title="C#" width="32" height="32" />
+                <img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"
+                    alt="Java" title="Java" width="32" height="32" />
+                <img class="tech-icon"
+                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+                    alt="JavaScript" title="JavaScript" width="32" height="32" />
+                <img class="tech-icon"
+                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
+                    alt="TypeScript" title="TypeScript" width="32" height="32" />
+                <img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"
+                    alt="PHP" title="PHP" width="32" height="32" />
+                <img class="tech-icon"
+                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"
+                    title="Python" width="32" height="32" />
+                <img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg"
+                    alt="Dart" title="Dart" width="32" height="32" />
+                <img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
+                    alt="HTML5" title="HTML5" width="32" height="32" />
+                <img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
+                    alt="CSS3" title="CSS3" width="32" height="32" />
+            </p>
+            <h3>Frameworks y Librerías:</h3>
+            <p>
+                <img class="tech-icon" src="https://laravel.com/img/favicon/apple-touch-icon.png" alt="Laravel"
+                    title="Laravel" width="32" height="32" />
+                <img class="tech-icon"
+                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg"
+                    alt="Angular" title="Angular" width="32" height="32" />
+                <img class="tech-icon"
+                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter"
+                    title="Flutter" width="32" height="32" />
+                <img class="tech-icon"
+                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js"
+                    title="Node.js" width="32" height="32" />
+            </p>
+            <h3>Herramientas y Tecnologías:</h3>
+            <p>
+                <img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
+                    alt="Git" title="Git" width="32" height="32" />
+                <img class="tech-icon"
+                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub"
+                    title="GitHub" width="32" height="32" />
+                <img class="tech-icon"
+                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlab/gitlab-original.svg" alt="GitLab"
+                    title="GitLab" width="32" height="32" />
+                <img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+                    alt="MySQL" title="MySQL" width="32" height="32" />
+                <img class="tech-icon"
+                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"
+                    alt="PostgreSQL" title="PostgreSQL" width="32" height="32" />
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Desarrollador de Software - dovmikesoul@gmail.com</p>
+    </footer>
+</body>
+
+</html>
