@@ -165,22 +165,48 @@
             color: #f3f4f6 !important;
         }
 
-        body.dark-mode a {
-            color: #38bdf8 !important;
-        }
-
         body.dark-mode .section {
             border-color: #374151;
         }
 
-        /* Elimina el filtro de las imágenes en modo dark */
-        body.dark-mode .tech-icon,
-        body.dark-mode img {
-            filter: none !important;
-        }
-
         #dark-mode-toggle:hover {
             background: rgba(60, 60, 60, 0.12);
+        }
+
+        /* Corrección vista mobile */
+        @media (max-width: 600px) {
+            #main-header>div {
+                /* text-align: center !important; */
+                max-width: 100vw !important;
+                padding: 0 0.5rem;
+            }
+
+            #main-header h1 {
+                font-size: 1.2rem !important;
+            }
+
+            #main-header .mobile-break {
+                display: block !important;
+                width: 100%;
+                height: 0;
+            }
+
+            #main-header .profile-img {
+                width: 60px !important;
+                height: 60px !important;
+            }
+
+            #main-header .switch {
+                width: 32px !important;
+                height: 16px !important;
+            }
+
+            #main-header #switch-knob {
+                width: 12px !important;
+                height: 12px !important;
+                top: 2px !important;
+                left: 2px !important;
+            }
         }
     </style>
     <script>
@@ -251,17 +277,24 @@
     <header id="main-header">
         <img src="https://scontent.ftlc3-1.fna.fbcdn.net/v/t39.30808-6/503750139_553922037779255_2157257659630892591_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeEAhrefzi1hye1BqBsprHKOV4SQVrKfO-9XhJBWsp8774jYOqSNoiRTZQ68h_FoMBWJqN2lBrwEgn3WaHaB7VkF&_nc_ohc=tYKpDIj5Z_EQ7kNvwG183vj&_nc_oc=Admb9yCOvx5yQLtOHxibK9yF1rtarNRNUj4AaTP27br4X5b-w3DtU7BGSfVcWYeKUGI&_nc_zt=23&_nc_ht=scontent.ftlc3-1.fna&_nc_gid=ryqOVhK2WNqQMG7_KKsrkQ&oh=00_AfNfE5J9cfm7jJPh7N3I9Bs5kiMAT_ErRCoY6GOr5WECsQ&oe=684D0C9B"
             alt="Foto de perfil" class="profile-img" />
-        <div style="text-align: left;">
-            <h1 style="color: #fff;">Desarrollador de Software</h1>
-            Tuxtla Gutiérrez, Chiapas |
-            <a href="mailto:dovmikesoul@gmail.com"
-                style="color: #fff; text-decoration: underline;">dovmikesoul@gmail.com</a> |
-            <a id="whatsapp-link" href="#" style="color: #25d366; text-decoration: underline; font-weight: 600;">
-                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp"
-                    width="20"
-                    style="vertical-align: middle; margin-right: 4px; filter: invert(54%) sepia(97%) saturate(749%) hue-rotate(85deg) brightness(95%) contrast(92%);" />
-                Enviar WhatsApp
-            </a>
+        <div style="text-align: left; width: 100%; max-width: 500px; box-sizing: border-box;">
+            <h1 style="color: #fff; font-size: 2rem; margin-bottom: 0.3rem;">Desarrollador de Software</h1>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.3rem 0.7rem; align-items: center; font-size: 1rem;">
+                <!-- <span>Tuxtla Gutiérrez, Chiapas</span>
+                <span style="display:none;" class="mobile-break"></span> -->
+                <!-- <span>|</span> -->
+                <a href="mailto:dovmikesoul@gmail.com"
+                    style="color: #fff; text-decoration: underline; word-break: break-all;">dovmikesoul@gmail.com</a>
+                <span>|</span>
+                <a id="whatsapp-link" href="#"
+                    style="color: #25d366; text-decoration: underline; font-weight: 600; display: flex; align-items: center;">
+                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp"
+                        width="20"
+                        style="vertical-align: middle; margin-right: 4px; filter: invert(54%) sepia(97%) saturate(749%) hue-rotate(85deg) brightness(95%) contrast(92%);" />
+                    Enviar WhatsApp
+                </a>
+            </div>
+
         </div>
         <label
             style="position: absolute; right: 2rem; top: 2rem; display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
@@ -277,11 +310,20 @@
     <main class="container">
         <section class="section">
             <h2>Resumen Profesional</h2>
-            <p>Desarrollador de software con experiencia en el diseño y desarrollo de aplicaciones web y móviles. Manejo
-                de diversos lenguajes de programación y frameworks modernos, con enfoque en la implementación de
-                soluciones eficientes y escalables. Capacidad para trabajar en equipos multidisciplinarios bajo
-                metodologías ágiles, con habilidades tanto en frontend como backend. Apasionado por la tecnología y el
-                aprendizaje continuo.</p>
+            <p id="typewriter"></p>
+            <script>
+                const text = "Desarrollador de software con experiencia en el diseño y desarrollo de aplicaciones web y móviles. Manejo de diversos lenguajes de programación y frameworks modernos, con enfoque en la implementación de soluciones eficientes y escalables. Capacidad para trabajar en equipos multidisciplinarios bajo metodologías ágiles, con habilidades tanto en frontend como backend. Apasionado por la tecnología y el aprendizaje continuo.";
+                const target = document.getElementById('typewriter');
+                let i = 0;
+                function typeWriter() {
+                    if (i < text.length) {
+                        target.textContent += text.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, 18);
+                    }
+                }
+                document.addEventListener('DOMContentLoaded', typeWriter);
+            </script>
         </section>
 
         <section class="section">
