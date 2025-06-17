@@ -6,217 +6,1104 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Currículum - Desarrollador de Software</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --secondary: #10b981;
+            --dark: #1f2937;
+            --darker: #111827;
+            --light: #f9fafb;
+            --lighter: #ffffff;
+            --gray: #6b7280;
+            --light-gray: #e5e7eb;
+            --dark-gray: #374151;
+            --transition: all 0.3s ease;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f9fafb;
-            color: #111827;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            transition: var(--transition);
         }
 
-        header,
-        footer {
-            text-align: center;
-            padding: 1rem;
+        body.dark-mode {
+            background-color: var(--darker);
+            color: var(--light);
         }
 
+        /* Header */
         header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #1f2937;
-            color: white;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             z-index: 1000;
-            transition: background 0.3s, backdrop-filter 0.3s, height 0.3s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-            height: 220px;
-            /* ocupa más área cuando está arriba */
-            justify-content: center;
+            transition: var(--transition);
+            padding: 1rem 0;
+        }
+
+        body.dark-mode header {
+            background: rgba(31, 41, 55, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
         header.scrolled {
-            background: rgba(31, 41, 55, 0.5);
+            padding: 0.5rem 0;
             backdrop-filter: blur(8px);
-            height: 80px;
-            /* reduce el tamaño al hacer scroll */
-            flex-direction: row !important;
-            justify-content: flex-start !important;
-            align-items: center !important;
-            gap: 0 !important;
-        }
-
-        .profile-img {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 3px solid #fff;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-            margin-bottom: 0.5rem;
-            background: #e5e7eb;
-            transition: margin 0.3s;
-        }
-
-        header.scrolled .profile-img {
-            margin-bottom: 0;
-            margin-right: 1rem;
-        }
-
-        .container {
-            max-width: 960px;
-            margin: 14rem auto 2rem auto;
-            /* más espacio arriba para header grande */
-            padding: 1rem;
-            background-color: white;
-            border-radius: 0.75rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: margin-top 0.3s;
-        }
-
-        header.scrolled~.container {
-            margin-top: 7rem !important;
-            /* menos espacio cuando header es pequeño */
-        }
-
-        h1,
-        h2,
-        h3 {
-            color: #1f2937;
-        }
-
-        h1 {
-            font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-        }
-
-        h2 {
-            font-size: 1.5rem;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            border-bottom: 2px solid #e5e7eb;
-            padding-bottom: 0.25rem;
-        }
-
-        p,
-        li {
-            font-size: 1rem;
-            line-height: 1.5;
-        }
-
-        ul {
-            list-style-type: disc;
-            padding-left: 1.5rem;
-        }
-
-        .section {
-            margin-bottom: 2rem;
-        }
-
-        .contact p {
-            margin: 0.25rem 0;
-        }
-
-        footer {
-            background-color: #1f2937;
-            color: white;
-        }
-
-        .tech-icon {
-            transition: transform 0.2s;
-            cursor: pointer;
-        }
-
-        .tech-icon:hover {
-            transform: scale(1.35);
-            z-index: 2;
+            background: rgba(255, 255, 255, 0.85);
         }
 
         body.dark-mode header.scrolled {
-            background: rgba(31, 41, 55, 0.5) !important;
-            backdrop-filter: blur(8px) !important;
+            background: rgba(31, 41, 55, 0.85);
         }
 
-        body.dark-mode {
-            background-color: #181a1b;
-            color: #f3f4f6;
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        body.dark-mode .container {
-            background-color: #23272b;
-            color: #f3f4f6;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        body.dark-mode header,
-        body.dark-mode footer {
-            background-color: #111827 !important;
-            color: #f3f4f6 !important;
+        .logo span {
+            color: var(--dark);
         }
 
-        body.dark-mode h1,
-        body.dark-mode h2,
-        body.dark-mode h3 {
-            color: #f3f4f6 !important;
+        body.dark-mode .logo span {
+            color: var(--light);
         }
 
-        body.dark-mode .section {
-            border-color: #374151;
+        .nav-links {
+            display: flex;
+            gap: 2rem;
         }
 
-        #dark-mode-toggle:hover {
-            background: rgba(60, 60, 60, 0.12);
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
         }
 
-        /* Corrección vista mobile */
-        @media (max-width: 600px) {
-            #main-header>div {
-                /* text-align: center !important; */
-                max-width: 100vw !important;
-                padding: 0 0.5rem;
+        body.dark-mode .nav-links a {
+            color: var(--light);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--dark);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        body.dark-mode .mobile-menu-btn {
+            color: var(--light);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(3, 114, 77, 0.1) 100%);
+        }
+
+        body.dark-mode .hero {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(16, 185, 129, 0.05) 100%);
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-content h1 span {
+            color: var(--primary);
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+            max-width: 90%;
+        }
+
+        body.dark-mode .hero-content p {
+            color: var(--light-gray);
+        }
+
+        .hero-image {
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .profile-img {
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 8px solid rgba(59, 130, 246, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        body.dark-mode .profile-img {
+            border-color: rgba(59, 130, 246, 0.4);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            color: var(--dark);
+            transition: var(--transition);
+        }
+
+        body.dark-mode .social-links a {
+            background-color: var(--dark-gray);
+            color: var(--light);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: 2px solid var(--primary);
+            margin-right: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+        }
+
+        body.dark-mode .btn-outline {
+            color: var(--light);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 4px;
+            bottom: -10px;
+            left: 25%;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        body.dark-mode .section-title p {
+            color: var(--light-gray);
+        }
+
+        /* About Section */
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: var(--light-gray);
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        body.dark-mode .skill-tag {
+            background-color: var(--dark-gray);
+        }
+
+        .skill-tag:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Experience Section */
+        .experience-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding-left: 50px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background-color: var(--light-gray);
+            left: 20px;
+            top: 0;
+        }
+
+        body.dark-mode .timeline::before {
+            background-color: var(--dark-gray);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding: 1.5rem;
+            background-color: var(--lighter);
+            border-radius: 0.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        body.dark-mode .timeline-item {
+            background-color: var(--dark);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .timeline-item:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            left: -39px;
+            top: 30px;
+            border: 4px solid var(--lighter);
+        }
+
+        body.dark-mode .timeline-item::before {
+            border-color: var(--dark);
+        }
+
+        .timeline-date {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 1rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-company {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .timeline-description {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        body.dark-mode .timeline-description {
+            color: var(--light-gray);
+        }
+
+        .timeline-list {
+            padding-left: 1.2rem;
+        }
+
+        .timeline-list li {
+            margin-bottom: 0.5rem;
+            color: var(--gray);
+        }
+
+        body.dark-mode .timeline-list li {
+            color: var(--light-gray);
+        }
+
+        /* Skills Section */
+        .skills-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background-color: var(--lighter);
+            border-radius: 0.5rem;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        body.dark-mode .skill-card {
+            background-color: var(--dark);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .skill-card:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .skill-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .skill-description {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        body.dark-mode .skill-description {
+            color: var(--light-gray);
+        }
+
+        /* Contact Section - Single Line Centered Version */
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            padding: 1.5rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            min-width: 200px;
+            /* Ancho mínimo para cada elemento */
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .contact-text h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            white-space: nowrap;
+        }
+
+        .contact-text p,
+        .contact-text a {
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        body.dark-mode .contact-text p,
+        body.dark-mode .contact-text a {
+            color: var(--light-gray);
+        }
+
+        .contact-text a:hover {
+            color: var(--primary);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .contact-info {
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .contact-info {
+                gap: 1.25rem;
             }
 
-            #main-header h1 {
-                font-size: 1.2rem !important;
+            .contact-item {
+                min-width: 160px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 1.5rem;
             }
 
-            #main-header .mobile-break {
-                display: block !important;
+            .contact-item {
+                min-width: auto;
                 width: 100%;
-                height: 0;
             }
 
-            #main-header .profile-img {
-                width: 60px !important;
-                height: 60px !important;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--gray);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        body.dark-mode footer {
+              background-color: var(--dark);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            color: var(--light-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 24px;
+            background-color: var(--light-gray);
+            border-radius: 12px;
+            transition: var(--transition);
+        }
+
+        body.dark-mode .toggle-switch {
+            background-color: var(--dark-gray);
+        }
+
+        .toggle-knob {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 50%;
+            transition: var(--transition);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        body.dark-mode .toggle-knob {
+            transform: translateX(26px);
+        }
+
+        .toggle-icon {
+            font-size: 1.2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 576px) {
+
+            .hero-container,
+            .about-container,
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
             }
 
-            #main-header .switch {
-                width: 32px !important;
-                height: 16px !important;
+            .hero-content {
+                order: 2;
+                text-align: center;
             }
 
-            #main-header #switch-knob {
-                width: 12px !important;
-                height: 12px !important;
-                top: 2px !important;
-                left: 2px !important;
+            .hero-image {
+                order: 1;
+            }
+
+            .hero-content p {
+                max-width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .hero-buttons .btn {
+                width: auto;
+                min-width: 200px;
+                margin-right: 0;
+                margin-bottom: 0;
+                text-align: center;
+            }
+
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: var(--lighter);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                gap: 1.5rem;
+                transition: var(--transition);
+                z-index: 999;
+            }
+
+            body.dark-mode .nav-links {
+                background-color: var(--dark);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero {
+                padding-top: 6rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .profile-img {
+                width: 250px;
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .btn {
+                display: block;
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+
+            .timeline {
+                padding-left: 30px;
+            }
+
+            .timeline::before {
+                left: 10px;
+            }
+
+            .timeline-item::before {
+                left: -29px;
             }
         }
     </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="header-container">
+            <a href="#" class="logo">
+                <i class="fas fa-code"></i>
+                <span>DovMikeSoul</span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="#home">Inicio</a>
+                <a href="#about">Sobre mí</a>
+                <a href="#experience">Experiencia</a>
+                <a href="#skills">Habilidades</a>
+                <a href="#contact">Contacto</a>
+                <label>
+
+                    <input type="checkbox" id="dark-mode-toggle" style="display: none;">
+                    <span id="dark-mode-icon" class="toggle-icon"></span>
+                    <span class="switch"
+                        style="width: 40px; height: 20px; background: #ccc; border-radius: 999px; position: relative; display: inline-block; transition: background 0.3s;">
+                        <span
+                            style="content: ''; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; background: white; border-radius: 50%; transition: transform 0.3s; "
+                            id="switch-knob"></span>
+                    </span>
+                </label>
+            </nav>
+
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Hola, soy <span>Miguel Angel Pérez Díaz</span></h1>
+                <p>Desarrollador de software apasionado por crear soluciones innovadoras y eficientes. Especializado en
+                    desarrollo web y móvil con enfoque en experiencia de usuario y rendimiento.</p>
+
+                <div class="social-links">
+                    <a href="https://github.com/dovmikesoul" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="www.linkedin.com/in/dovmikesoul" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://web.facebook.com/miguel.angel.perez.diaz.624459" target="_blank"><i
+                            class="fab fa-facebook"></i></a>
+                </div>
+
+                <div class="hero-buttons">
+                    <div>
+                        <a href="#contact" class="btn">Contactarme</a>
+                        <a href="CV3.pdf" class="btn btn-outline" download>Ver CV</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-image">
+                <img src="prf.jpg" alt="Tu Nombre" class="profile-img">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="section-title">
+            <h2>Sobre Mí</h2>
+            <p>Conoce más sobre mí, mis habilidades y lo que me apasiona</p>
+        </div>
+
+        <div class="about-container">
+            <div>
+                <h3>¿Quién soy?</h3>
+                <p>Soy un desarrollador de software con experiencia en el diseño y desarrollo de aplicaciones web y
+                    móviles. Manejo diversos lenguajes de programación y frameworks modernos, con enfoque en la
+                    implementación de soluciones eficientes y escalables.</p>
+
+                <p>Capacidad para trabajar en equipos multidisciplinarios bajo metodologías ágiles, con habilidades
+                    tanto en frontend como backend. Apasionado por la tecnología y el aprendizaje continuo.</p>
+
+                <div class="about-skills">
+
+                    <span class="skill-tag">C++</span>
+                    <span class="skill-tag">C#</span>
+                    <span class="skill-tag">HTML</span>
+                    <span class="skill-tag">CSS</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">TypeScript</span>
+                    <span class="skill-tag">Dart</span>
+                    <span class="skill-tag">PHP</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Git</span>
+                    <span class="skill-tag">SQL</span>
+                </div>
+            </div>
+
+            <div>
+                <h3>Educación</h3>
+                <div class="timeline-item">
+                    <span class="timeline-date">2020 - 2025</span>
+                    <h4 class="timeline-title">Lic. Ing. en Desarrollo y Tecnologías de Software</h4>
+                    <span class="timeline-company">Universidad Autónoma de Chiapas (UNACH)</span>
+                    <p class="timeline-description">Formación académica en desarrollo de software, algoritmos,
+                        estructuras de datos y gestión de proyectos tecnológicos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience" id="experience">
+        <div class="section-title">
+            <h2>Experiencia Laboral</h2>
+            <p>Mi trayectoria profesional y los proyectos en los que he trabajado</p>
+        </div>
+
+        <div class="experience-container">
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="timeline-date">Agosto 2024 - Mayo 2025</span>
+                    <h4 class="timeline-title">Desarrollador de Software</h4>
+                    <a href="https://mwconsultores.com.mx/" target="_blank" class="timeline-company">MW Consultores -
+                        Tuxtla Gutiérrez, Chiapas</a>
+                    <p class="timeline-description">C. Playas de Catazajá 1094, Col. Los Laguitos</p>
+
+                    <ul class="timeline-list">
+                        <li>Desarrollo y mantenimiento de aplicaciones web y móviles personalizadas utilizando Laravel,
+                            Angular y Flutter.</li>
+                        <li>Construcción de APIs y lógica de negocio en PHP y Node.js, integrando bases de datos SQL.
+                        </li>
+                        <li>Implementación de interfaces responsivas y funcionales con HTML, CSS y TypeScript.</li>
+                        <li>Uso de Git para control de versiones y colaboración en entornos ágiles con metodologías como
+                            Scrum.</li>
+                    </ul>
+                </div>
+
+                <!-- Agregar más experiencias aquí -->
+                <!--
+                <div class="timeline-item">
+                    <span class="timeline-date">Fecha</span>
+                    <h4 class="timeline-title">Título del puesto</h4>
+                    <span class="timeline-company">Nombre de la empresa</span>
+                    <p class="timeline-description">Descripción breve del puesto</p>
+                    
+                    <ul class="timeline-list">
+                        <li>Responsabilidad o logro 1</li>
+                        <li>Responsabilidad o logro 2</li>
+                        <li>Responsabilidad o logro 3</li>
+                    </ul>
+                </div>
+                -->
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <div class="section-title">
+            <h2>Habilidades Técnicas</h2>
+            <p>Las tecnologías y herramientas que domino</p>
+        </div>
+
+        <div class="skills-container">
+            <div class="skills-grid">
+
+
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <img src="Laravel.png" alt="Laravel" style="width: 48px; height: 48px;">
+                    </div>
+                    <h3 class="skill-title">Laravel</h3>
+                    <p class="skill-description">Creación de APIs RESTful y aplicaciones web con Laravel, Eloquent ORM y
+                        Blade.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">
+
+                        <img src="flutter.png" alt="Flutter" style="width: 48px; height: 48px;">
+                    </div>
+                    <h3 class="skill-title">Flutter</h3>
+                    <p class="skill-description">Desarrollo de aplicaciones móviles multiplataforma con Flutter y Dart,
+                        interfaces modernas y alto rendimiento.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <img src="angular.png" alt="Angular" style="width: 48px; height: 48px;">
+                    </div>
+                    <h3 class="skill-title">Angular</h3>
+                    <p class="skill-description">Desarrollo de aplicaciones SPA con Angular, RxJS, servicios,
+                        componentes y módulos.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">
+
+                        <img src=" https://cdn-icons-png.flaticon.com/512/5968/5968322.png" alt="Node JS"
+                            style="width: 48px; height: 48px;">
+                    </div>
+                    <h3 class="skill-title">Node.js</h3>
+                    <p class="skill-description">Desarrollo backend con Node.js, Express, creación de APIs y servicios
+                        web.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3 class="skill-title">Bases de Datos</h3>
+                    <p class="skill-description">MySQL, diseño de esquemas y administración de bases de datos.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fab fa-git-alt"></i>
+                    </div>
+                    <h3 class="skill-title">Control de Versiones</h3>
+                    <p class="skill-description">Git, GitHub y flujos de trabajo colaborativos.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <section class="contact" id="contact">
+        <div class="section-title">
+            <h2>Contacto</h2>
+            <p>Ponte en contacto conmigo para oportunidades de colaboración</p>
+        </div>
+    </section>
+    <footer>
+        <div class="footer-container">
+            <div class="contact-container">
+
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Email</h3>
+                            <a href="mailto:dovmikesoul@gmail.com">dovmikesoul@gmail.com</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>WhatsApp</h3>
+                            <a id="whatsapp-link" href="#">+52 961 244 5094</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Ubicación</h3>
+                            <p>Tuxtla Gutiérrez, Chiapas, México</p>
+                        </div>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="https://github.com/dovmikesoul" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="www.linkedin.com/in/dovmikesoul" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://web.facebook.com/miguel.angel.perez.diaz.624459" target="_blank"><i
+                                class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <p class="copyright">&copy; 2025 dovmikesoul. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+
     <script>
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('main-header');
-            if (window.scrollY > 30) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active')
+                ? '<i class="fas fa-times"></i>'
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
         });
 
 
@@ -236,10 +1123,12 @@
 
         function setDarkMode(enabled) {
             document.body.classList.toggle('dark-mode', enabled);
-            document.getElementById('dark-mode-icon').textContent = enabled ? '☀️' : '🌙';
+
+            const iconElement = document.getElementById('dark-mode-icon');
+            iconElement.innerHTML = enabled ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+
             document.getElementById('dark-mode-toggle').checked = enabled;
 
-            // Mueve el "knob" del switch
             document.getElementById('switch-knob').style.transform = enabled ? 'translateX(20px)' : 'translateX(0)';
             document.querySelector('.switch').style.background = enabled ? '#4caf50' : '#ccc';
 
@@ -271,157 +1160,5 @@
         });
 
     </script>
-</head>
-
-<body>
-    <header id="main-header">
-        <img src="https://scontent.ftlc3-1.fna.fbcdn.net/v/t39.30808-6/503750139_553922037779255_2157257659630892591_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeEAhrefzi1hye1BqBsprHKOV4SQVrKfO-9XhJBWsp8774jYOqSNoiRTZQ68h_FoMBWJqN2lBrwEgn3WaHaB7VkF&_nc_ohc=tYKpDIj5Z_EQ7kNvwG183vj&_nc_oc=Admb9yCOvx5yQLtOHxibK9yF1rtarNRNUj4AaTP27br4X5b-w3DtU7BGSfVcWYeKUGI&_nc_zt=23&_nc_ht=scontent.ftlc3-1.fna&_nc_gid=ryqOVhK2WNqQMG7_KKsrkQ&oh=00_AfNfE5J9cfm7jJPh7N3I9Bs5kiMAT_ErRCoY6GOr5WECsQ&oe=684D0C9B"
-            alt="Foto de perfil" class="profile-img" />
-        <div style="text-align: left; width: 100%; max-width: 500px; box-sizing: border-box;">
-            <h1 style="color: #fff; font-size: 2rem; margin-bottom: 0.3rem;">Desarrollador de Software</h1>
-            <div style="display: flex; flex-wrap: wrap; gap: 0.3rem 0.7rem; align-items: center; font-size: 1rem;">
-                <!-- <span>Tuxtla Gutiérrez, Chiapas</span>
-                <span style="display:none;" class="mobile-break"></span> -->
-                <!-- <span>|</span> -->
-                <a href="mailto:dovmikesoul@gmail.com"
-                    style="color: #fff; text-decoration: underline; word-break: break-all;">dovmikesoul@gmail.com</a>
-                <span>|</span>
-                <a id="whatsapp-link" href="#"
-                    style="color: #25d366; text-decoration: underline; font-weight: 600; display: flex; align-items: center;">
-                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp"
-                        width="20"
-                        style="vertical-align: middle; margin-right: 4px; filter: invert(54%) sepia(97%) saturate(749%) hue-rotate(85deg) brightness(95%) contrast(92%);" />
-                    Enviar WhatsApp
-                </a>
-            </div>
-
-        </div>
-        <label
-            style="position: absolute; right: 2rem; top: 2rem; display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-            <input type="checkbox" id="dark-mode-toggle" style="display: none;">
-            <span id="dark-mode-icon" style="font-size: 1.2rem;">🌙</span>
-            <span class="switch" style="width: 40px; height: 20px; background: #ccc; border-radius: 999px; position: relative; display: inline-block; transition: background 0.3s;">
-                <span style="content: ''; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; background: white; border-radius: 50%; transition: transform 0.3s; " id="switch-knob"></span>
-            </span>
-        </label>
-
-    </header>
-
-    <main class="container">
-        <section class="section">
-            <h2>Resumen Profesional</h2>
-            <p id="typewriter"></p>
-            <script>
-                const text = "Desarrollador de software con experiencia en el diseño y desarrollo de aplicaciones web y móviles. Manejo de diversos lenguajes de programación y frameworks modernos, con enfoque en la implementación de soluciones eficientes y escalables. Capacidad para trabajar en equipos multidisciplinarios bajo metodologías ágiles, con habilidades tanto en frontend como backend. Apasionado por la tecnología y el aprendizaje continuo.";
-                const target = document.getElementById('typewriter');
-                let i = 0;
-                function typeWriter() {
-                    if (i < text.length) {
-                        target.textContent += text.charAt(i);
-                        i++;
-                        setTimeout(typeWriter, 18);
-                    }
-                }
-                document.addEventListener('DOMContentLoaded', typeWriter);
-            </script>
-        </section>
-
-        <section class="section">
-            <h2>Experiencia Laboral</h2>
-            <h3><a href="https://mwconsultores.com.mx/" target="_blank" rel="noopener noreferrer">MW Consultores –
-                    Tuxtla Gutiérrez, Chiapas</a></h3>
-            <p><strong>Cargo:</strong> Desarrollador de Software</p>
-            <p><strong>Periodo:</strong> Agosto 2024 – Mayo 2025</p>
-            <p><strong>Dirección:</strong> C. Playas de Catazajá 1094, Col. Los Laguitos</p>
-            <ul>
-                <li>Desarrollo y mantenimiento de aplicaciones web y móviles personalizadas utilizando Laravel, Angular
-                    y Flutter.</li>
-                <li>Construcción de APIs y lógica de negocio en PHP y Node.js, integrando bases de datos SQL.</li>
-                <li>Implementación de interfaces responsivas y funcionales con HTML, CSS y TypeScript.</li>
-                <li>Uso de Git para control de versiones y colaboración en entornos ágiles con metodologías como Scrum.
-                </li>
-                <li>Documentación técnica de sistemas y soporte post implementación.</li>
-            </ul>
-        </section>
-
-        <section class="section">
-            <h2>Educación</h2>
-            <h3><a href="https://www.unach.mx/" target="_blank" rel="noopener noreferrer">Universidad Autónoma de
-                    Chiapas (UNACH)</a></h3>
-            <p><strong>Carrera:</strong> Lic. Ing. en Desarrollo y Tecnologías de Software</p>
-            <p><strong>Periodo:</strong> 2020 – 2025</p>
-            <p><strong>Ubicación:</strong> Boulevard Belisario Domínguez, Kilómetro 1081, Terán, Tuxtla Gutiérrez,
-                Chiapas, C.P. 29050</p>
-        </section>
-
-        <section class="section">
-            <h2>Habilidades Técnicas</h2>
-            <h3>Lenguajes de Programación:</h3>
-            <p>
-                <img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C"
-                    title="C" width="32" height="32" />
-                <img class="tech-icon"
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++"
-                    title="C++" width="32" height="32" />
-                <img class="tech-icon"
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C#"
-                    title="C#" width="32" height="32" />
-                <img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"
-                    alt="Java" title="Java" width="32" height="32" />
-                <img class="tech-icon"
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
-                    alt="JavaScript" title="JavaScript" width="32" height="32" />
-                <img class="tech-icon"
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
-                    alt="TypeScript" title="TypeScript" width="32" height="32" />
-                <img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"
-                    alt="PHP" title="PHP" width="32" height="32" />
-                <img class="tech-icon"
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"
-                    title="Python" width="32" height="32" />
-                <img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg"
-                    alt="Dart" title="Dart" width="32" height="32" />
-                <img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
-                    alt="HTML5" title="HTML5" width="32" height="32" />
-                <img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
-                    alt="CSS3" title="CSS3" width="32" height="32" />
-            </p>
-            <h3>Frameworks y Librerías:</h3>
-            <p>
-                <img class="tech-icon" src="https://laravel.com/img/favicon/apple-touch-icon.png" alt="Laravel"
-                    title="Laravel" width="32" height="32" />
-                <img class="tech-icon"
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg"
-                    alt="Angular" title="Angular" width="32" height="32" />
-                <img class="tech-icon"
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter"
-                    title="Flutter" width="32" height="32" />
-                <img class="tech-icon"
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js"
-                    title="Node.js" width="32" height="32" />
-            </p>
-            <h3>Herramientas y Tecnologías:</h3>
-            <p>
-                <img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
-                    alt="Git" title="Git" width="32" height="32" />
-                <img class="tech-icon"
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub"
-                    title="GitHub" width="32" height="32" />
-                <img class="tech-icon"
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlab/gitlab-original.svg" alt="GitLab"
-                    title="GitLab" width="32" height="32" />
-                <img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
-                    alt="MySQL" title="MySQL" width="32" height="32" />
-                <img class="tech-icon"
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"
-                    alt="PostgreSQL" title="PostgreSQL" width="32" height="32" />
-            </p>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2025 Desarrollador de Software - dovmikesoul@gmail.com</p>
-    </footer>
-</body>
 
 </html>
