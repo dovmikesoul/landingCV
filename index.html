@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="color-scheme" content="light dark">
+
     <title>Currículum - Desarrollador de Software</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
@@ -29,15 +32,16 @@
                 <a href="#skills">Habilidades</a>
                 <a href="#products">Productos</a>
                 <a href="#contact">Contacto</a>
-                <label>
-                    <input type="checkbox" id="dark-mode-toggle" style="display: none;">
-                    <span id="dark-mode-icon" class="toggle-icon"></span>
-                    <span class="switch"
-                        style="width: 40px; height: 20px; background: #ccc; border-radius: 999px; position: relative; display: inline-block; transition: background 0.3s;">
-                        <span
-                            style="content: ''; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; background: white; border-radius: 50%; transition: transform 0.3s; "
-                            id="switch-knob"></span> </span>
-                </label>
+              <label style="cursor: pointer; display: flex; align-items: center; gap: 10px;">
+    <input type="checkbox" id="dark-mode-toggle" style="display: none;">
+    <span id="dark-mode-icon" class="toggle-icon"></span>
+    <span class="switch"
+        style="width: 40px; height: 20px; background: #ccc; border-radius: 999px; position: relative; display: inline-block; transition: background 0.3s;">
+        <span id="switch-knob"
+            style="position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; background: white; border-radius: 50%; transition: transform 0.3s;">
+        </span> 
+    </span>
+</label>
             </nav>
             <button class="mobile-menu-btn">
                 <i class="fas fa-bars"></i>

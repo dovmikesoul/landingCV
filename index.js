@@ -32,42 +32,62 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-function setDarkMode(enabled) {
-    document.body.classList.toggle('dark-mode', enabled);
 
-    const iconElement = document.getElementById('dark-mode-icon');
-    iconElement.innerHTML = enabled ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+function setDarkMode(isDark) {
+   
+    const body = document.body;
+    const checkbox = document.getElementById('dark-mode-toggle');
+    const knob = document.getElementById('switch-knob');
+    const switchBg = knob.parentElement; // El contenedor del switch
+    const icon = document.getElementById('dark-mode-icon');
 
-    document.getElementById('dark-mode-toggle').checked = enabled;
+    if (isDark) {
+        body.classList.add('dark-mode');
+        checkbox.checked = true;
+        localStorage.setItem('darkMode', 'enabled');
 
-    document.getElementById('switch-knob').style.transform = enabled ? 'translateX(20px)' : 'translateX(0)';
-    document.querySelector('.switch').style.background = enabled ? '#4caf50' : '#ccc';
+        // Estilos visuales del Switch (Modo Oscuro)
+        knob.style.transform = 'translateX(20px)';
+        switchBg.style.background = '#3b82f6'; // Color primario azul
+        icon.textContent = '🌙';
+    } else {
+        body.classList.remove('dark-mode');
+        checkbox.checked = false;
+        localStorage.setItem('darkMode', 'disabled');
 
-    localStorage.setItem('darkMode', enabled ? '1' : '0');
-}
-
-function getSystemPrefersDark() {
-    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-    let darkMode = localStorage.getItem('darkMode');
-    if (darkMode === null) {
-        darkMode = getSystemPrefersDark() ? '1' : '0';
+        // Estilos visuales del Switch (Modo Claro)
+        knob.style.transform = 'translateX(0px)';
+        switchBg.style.background = '#ccc';
+        icon.textContent = '☀️';
     }
-    setDarkMode(darkMode === '1');
+}
 
+// Evento de carga inicial
+document.addEventListener('DOMContentLoaded', function () {
+     localStorage.clear();
+    const userPreference = localStorage.getItem('darkMode');
+    const systemMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+    // Estado inicial
+    if (userPreference === 'enabled') {
+        setDarkMode(true);
+    } else if (userPreference === 'disabled') {
+        setDarkMode(false);
+    } else {
+        setDarkMode(systemMediaQuery.matches);
+    }
+
+    // Escuchar el click en el toggle
     document.getElementById('dark-mode-toggle').addEventListener('change', function (e) {
         setDarkMode(e.target.checked);
     });
 
-    if (window.matchMedia) {
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-            if (localStorage.getItem('darkMode') === null) {
-                setDarkMode(e.matches);
-            }
-        });
-    }
+    // Escuchar cambios del sistema
+    systemMediaQuery.addEventListener('change', e => {
+        if (!localStorage.getItem('darkMode')) {
+            setDarkMode(e.matches);
+        }
+    });
 });
 
 
