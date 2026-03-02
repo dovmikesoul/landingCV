@@ -20,7 +20,7 @@ document.querySelectorAll('.nav-links a').forEach(link => {
 
 // Detecta si es móvil o escritorio y redirige al enlace correcto de WhatsApp
 document.addEventListener('DOMContentLoaded', function () {
-    const phone = '529612445094';
+    const phone = '529671358399';
     const message = encodeURIComponent('¡Hola! Me gustaría ponerme en contacto contigo.');
     const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
     const waUrl = isMobile
