@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Miguel Angel Pérez Díaz — Developer</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -948,7 +949,7 @@
     <p>© 2025 dovmikesoul — Todos los derechos reservados.</p>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // ── THEME ──
 const body = document.body;
 const themeBtn = document.getElementById('theme-toggle');
@@ -997,6 +998,7 @@ nav.querySelectorAll('a').forEach(a => {
 
 // ── WHATSAPP ──
 document.addEventListener('DOMContentLoaded', function () {
+    localStorage.clear();
     const phone = '529671358399';
     const msg = encodeURIComponent('¡Hola! Me gustaría ponerme en contacto contigo.');
     const mobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
