@@ -875,11 +875,131 @@
 
         /* ── FOOTER ── */
         footer {
+            position: relative;
             background: var(--surface2);
             border-top: 1px solid var(--border);
             padding: 2rem 3rem;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             color: var(--text3);
+        }
+
+        /* 🔥 El truco para centrar el texto: Creamos un elemento invisible a la izquierda 
+   que ocupa el mismo espacio que el menú de la derecha */
+        footer::before {
+            content: '';
+            flex: 1;
+        }
+
+        .footer-text {
+            flex: 0 1 auto;
+            text-align: center;
+            margin: 0;
+            /* Asegura que no tenga margen extra */
+        }
+
+        .footer-menu-flotante {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            /* Empuja el botón hacia la derecha */
+            position: relative;
+        }
+
+        /* Estilo del botón usando tus variables */
+        .footer-btn-menu {
+            background: var(--surface);
+            color: var(--text2);
+            border: 1px solid var(--border);
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-weight: 500;
+            transition: var(--t);
+        }
+
+        .footer-btn-menu:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+            box-shadow: var(--card-shadow);
+        }
+
+        /* Estilo del menú desplegable con animación suave */
+        .footer-enlaces-ocultos {
+            position: absolute;
+            bottom: 130%;
+            /* Despliega hacia arriba */
+            right: 0;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--card-shadow-hover);
+            min-width: 160px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+
+            /* Animación inicial oculta */
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(15px);
+            transition: var(--t);
+            z-index: 100;
+        }
+
+        /* Clase dinámica para mostrar el menú */
+        .footer-enlaces-ocultos.mostrar {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .footer-enlaces-ocultos a {
+            color: var(--text2);
+            text-decoration: none;
+            padding: 0.85rem 1.25rem;
+            font-weight: 500;
+            border-bottom: 1px solid var(--border);
+            transition: var(--t);
+        }
+
+        .footer-enlaces-ocultos a:last-child {
+            border-bottom: none;
+        }
+
+        .footer-enlaces-ocultos a:hover {
+            background: var(--accent-soft);
+            color: var(--accent);
+        }
+
+        /* Ajuste Responsive para móviles */
+        @media (max-width: 768px) {
+            footer {
+                flex-direction: column;
+                /* Apila los elementos */
+                gap: 1.5rem;
+                padding: 2rem 1.5rem;
+            }
+
+            footer::before {
+                display: none;
+                /* Quitamos el balanceo invisible en móvil */
+            }
+
+            .footer-menu-flotante {
+                justify-content: center;
+                /* Centra el botón en móvil */
+                width: 100%;
+            }
+
+            .footer-enlaces-ocultos {
+                right: auto;
+                width: 100%;
+                /* El menú toma el ancho en móvil */
+                text-align: center;
+            }
         }
 
         /* ── ANIMATIONS ── */
@@ -1104,7 +1224,8 @@
                 <div class="skill-card">
                     <div class="skill-icon"><i class="fab fa-react" style="font-size: 32px;"></i></div>
                     <div class="skill-name">React</div>
-                    <div class="skill-desc">Desarrollo de interfaces de usuario interactivas y componentes reutilizables.</div>
+                    <div class="skill-desc">Desarrollo de interfaces de usuario interactivas y componentes
+                        reutilizables.</div>
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon"><img src="dotNET.png" alt=".NET"></div>
@@ -1143,7 +1264,8 @@
                 <div class="product-card">
                     <div class="product-header">
                         <div class="product-header-dot"></div>
-                        <div class="product-header-title"><a title="Link versión demo del sistema" href="https://webabarrotes.com">Punto de Venta</a></div>
+                        <div class="product-header-title"><a title="Link versión demo del sistema"
+                                href="https://webabarrotes.com">Punto de Venta</a></div>
                         <div class="product-header-badge">WEB</div>
                     </div>
                     <div id="theCarousel" class="carousel slide" data-ride="carousel">
@@ -1427,7 +1549,8 @@
         <div class="container">
             <div class="section-label">Redes sociales y contacto</div>
             <h2 class="section-title">Contacto</h2>
-            <p class="section-sub"> Comunícate conmigo si te interesa alguno de mis productos o si necesitas una solución a medida.</p>
+            <p class="section-sub"> Comunícate conmigo si te interesa alguno de mis productos o si necesitas una
+                solución a medida.</p>
 
             <div class="contact-grid fade-in">
                 <a id="whatsapp-link" href="#" class="contact-card" target="_blank">
@@ -1467,7 +1590,17 @@
     </section>
 
     <footer>
-        <p>© 2025 dovmikesoul — Todos los derechos reservados.</p>
+        <p class="footer-text">2026 - dovmikesoul</p>
+
+        <div class="footer-menu-flotante">
+            <button id="btnDesplegar" class="footer-btn-menu">Otros enlaces ▼</button>
+
+            <div id="listaEnlaces" class="footer-enlaces-ocultos">
+                <a href="https://drive.google.com/drive/folders/1WerXk-TLbuh2TGxPQpHL65c8y_hOg8BM?usp=drive_link">Direct´s X</a>
+                <a href="#">Nada</a>
+                <a href="#">Nada</a>
+            </div>
+        </div>
     </footer>
 
     <script>
@@ -1557,6 +1690,23 @@
         window.addEventListener('scroll', () => {
             document.getElementById('header').style.borderBottomColor =
                 window.scrollY > 10 ? 'var(--border)' : 'transparent';
+        });
+
+        // ── ENLACES FOOTER ──
+        const btnDesplegar = document.getElementById('btnDesplegar');
+        const listaEnlaces = document.getElementById('listaEnlaces');
+
+        // Alternar el menú al hacer clic
+        btnDesplegar.addEventListener('click', (event) => {
+            listaEnlaces.classList.toggle('mostrar');
+            event.stopPropagation(); // Evita que se cierre al momento de abrirlo
+        });
+
+        // Cerrar el menú si se hace clic fuera de él
+        window.addEventListener('click', (event) => {
+            if (listaEnlaces.classList.contains('mostrar') && event.target !== btnDesplegar) {
+                listaEnlaces.classList.remove('mostrar');
+            }
         });
     </script>
 </body>
